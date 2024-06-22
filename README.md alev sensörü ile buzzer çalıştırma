@@ -1,0 +1,21 @@
+int flameSensorPin = 2; // Alev sensörünün bağlı olduğu dijital pin
+int buzzerPin = 8; // Buzzer veya LED'in bağlı olduğu dijital pin
+int sensorValue = 0;
+
+void setup() {
+  pinMode(flameSensorPin, INPUT); // Alev sensörünü giriş olarak ayarla
+  pinMode(buzzerPin, OUTPUT); // Buzzer veya LED'i çıkış olarak ayarla
+  Serial.begin(9600); // Seri iletişimi başlat
+}
+
+void loop() {
+  sensorValue = digitalRead(flameSensorPin); // Alev sensöründen gelen değeri oku
+  Serial.println(sensorValue); // Değeri seri monitöre yazdır
+
+  if (sensorValue == LOW) { // Alev algılandığında (sensör modülüne göre HIGH veya LOW olabilir)
+    digitalWrite(buzzerPin, HIGH); // Buzzer veya LED'i aç
+  } else {
+    digitalWrite(buzzerPin, LOW); // Buzzer veya LED'i kapat
+  }
+  delay(100); // 100 ms bekle
+}
